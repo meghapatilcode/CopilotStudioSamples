@@ -1,8 +1,6 @@
 # Copilot Studio Agents interaction
 
-This is a simple example of how to interact with Copilot Studio Agents as they were first-party agents in Semantic Kernel.
-
-![alt text](image.png)
+This is a simple example of how to interact with Copilot Studio Agents as they were first-party agents in Semantic Kernel using the DirectLine API.
 
 ## Rationale
 
@@ -26,63 +24,65 @@ The implementation enables seamless integration with Copilot Studio agents via t
 
 - [`CopilotMessageContent`](src/agents/copilot_studio/copilot_message_content.py): Introduces `CopilotMessageContent`, an extension of `ChatMessageContent` that can represent rich message types from Copilot Studio—including plain text, adaptive cards, and suggested actions.
 
-Additionally, we do enforce [authentication to the DirectLine API](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-web-security).
-
 ## Usage
-
-> [!NOTE]
-> Working with Copilot Studio Agents requires a [subscription](https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-licensing-subscriptions) to Microsoft Copilot Studio.
 
 For this sample, we have created two agents in Copilot Studio:
 - The **TaglineGenerator agent** creates taglines for products based on descriptions
-- The **BrandAuditor agent** evaluates and approves/rejects taglines based on brand guidelines
+- The **BrandAuditor agent** evaluates and approves or rejects taglines based on brand guidelines
 
 The TaglineGenerator is used in the single agent chat example, allowing you to interact with it directly. In the group chat example, both the TaglineGenerator and the BrandAuditor agents collaborate to create and refine taglines that meet brand requirements.
 
 ### Setting Up Copilot Studio Agents
-Follow these steps to set up your Copilot Studio agents:
+Follow these steps to set up the Copilot Studio agents:
 
-
-1. Download the `CopilotAgentsInSemanticKernel_1_0_0_1.zip` file. This is a Power Platform solution that contains the two agents.
+1. Download the `CopilotAgentsSemanticKernelDemo_1_0_0_1.zip` file. This is a Power Platform solution that contains the two agents described in previous section.
 2. Follow the steps in the "How to Import an Agent Developed in Copilot Studio" section of [this documentation](https://techcommunity.microsoft.com/blog/modernworkappconsult/how-to-export-an-agent-developed-in-copilot-studio/4391562) to import the agents into your Power Platform environment. After importing, you will see the TaglineGenerator and BrandAuditor agents in the list of Copilot Studio agents in your environment.
 3. Configure each agent for DirectLine communication:
     -   Turn off default authentication under the agent Settings > Security > Authentication.
     ![Turn off default authentication](./images/authentication.png)  
-    -    [Setup web channel security](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-web-security) and copy the secret value. This enables secured access to copilot agents with DirectLine secrets or tokens.
+    -    [Enable web channel security](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-web-security) under agent Settings > Security > Web channel security > Require secured access. This enables secured access to copilot agents using DirectLine secrets or tokens. Copy the secret for the agent and save it for later use.
+    ![Enable web channel security](./images/web_channel_security.png)
     -    [Publish the agents](https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels?tabs=web#publish-the-latest-content) to start using them.
 
 ### Setting Up Environment
 
-1. Copy the `.env.sample` file to `.env` and add the agent secrets to your `.env` file:
+1. Create a `.env` file using the `.env.sample` file and add the agent secrets copied earlier to your `.env` file:
 ```
 AUDITOR_AGENT_SECRET=<Brand Auditor agent secret>
 TAGLINE_AGENT_SECRET=<Tagline Generator agent secret>
 ```
-2. Set up your environment:
+2. Set up your Python environment:
 
 ```bash
+cd SemanticKernelOrchestration/src
 python -m venv .venv
 
 # On Mac/Linux
 source .venv/bin/activate
 # On Windows
-.venv\Scripts\Activate.ps1
+.venv\Scripts\activate
 
 pip install -r requirements.txt
 ```
 
-### Running the Single Agent Chat
+### Running Single Agent Chat in Semantic Kernel
 
 ```bash
 chainlit run --port 8081 .\chat.py
 ```
 
-The chat.py file demonstrates a web-based chat interface that allows for multi-turn conversations with a single agent.
+The chat.py file demonstrates a web-based chat interface that allows for multi-turn conversations with a single copilot agent.
 
-### Running the Agent Group Chat
+![agent chat](images/tagline_generator_agent.png)
+
+### Running Agent Group Chat in Semantic Kernel
 
 ```bash
 python group_chat.py
 ```
 
 The agents will collaborate automatically, with the TaglineGenerator creating taglines and the BrandAuditor providing feedback until a satisfactory tagline is approved.
+
+![Agent group chat 1](images/agent_group_chat_1.png)
+
+![Agent group chat 2](images/agent_group_chat_2.png)
