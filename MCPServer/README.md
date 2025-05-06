@@ -1,7 +1,14 @@
 
 # MCP Server for Copilot Studio Agents
 
-In this exercise, you will explore how to connect Copilot Studio agents to MCP (Model Context Protocol)-compatible clients using a custom-built MCP server. You will set up a Copilot Studio agent, configure it for DirectLine communication, and run an MCP server that acts as a bridge between the agent and any MCP-compatible client. You will learn to run the MCP server locally using MCP Inspector and use it with a client like Claude Desktop.
+In this exercise, you will explore how to connect Copilot Studio agents to MCP (Model Context Protocol)-compatible clients using a custom-built MCP server.
+
+## What You Will Learn
+
+- Set up a Copilot Studio agent and configure it for DirectLine communication
+- Run a custom MCP server that acts as a bridge between Copilot Studio and MCP-compatible clients
+- Test the MCP server locally using MCP Inspector
+- Interact with your agent through an MCP-compatible client like Claude Desktop and observe multi-turn conversations with preserved context across messages
 
 ## Steps
 
