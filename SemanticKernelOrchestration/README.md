@@ -1,4 +1,4 @@
-# Copilot Studio Agents interaction
+# Orchestration of Copilot Studio Agents in Semantic Kernel
 
 This is a simple example of how to interact with Copilot Studio Agents as they were first-party agents in Semantic Kernel using the DirectLine API.
 
