@@ -31,7 +31,7 @@ Follow these steps to set up the Copilot Studio agent:
 git clone https://github.com/CrewAakash/mcp-server-for-copilot.git
 ```
 
-2. Follow the steps in the [README](https://github.com/CrewAakash/mcp-server-for-copilot?tab=readme-ov-file#-mcp-server-for-copilot-studio-agents) to set up the MCP server and run it.
+2. Follow the steps in the [README](https://github.com/CrewAakash/mcp-server-for-copilot?tab=readme-ov-file#-mcp-server-for-copilot-studio-agents) to set up the MCP server and run it. Here's a quick look at what the setup involves:
 
     1. Add environment variables required for DirectLine communication in `.env` file. Use the agent secret copied earlier to your `.env` file.
     2. Configure agent definition in `agent_definitions.json` file. The agent definition is used by the MCP client to identify the agent and its capabilities, so it can route the queries correctly.
